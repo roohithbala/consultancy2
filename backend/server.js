@@ -39,11 +39,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api-status", (req, res) => {
-  db.query("SELECT 1", (err, result) => {
+  db.query("SHOW TABLES", (err, result) => {
     if (err) {
       return res.status(500).json({ status: "error", message: "Database connection failed", error: err });
     }
-    res.json({ status: "ok", message: "Database connected successfully", data: result });
+    res.json({ status: "ok", message: "Database connected successfully", tables: result });
   });
 });
 
