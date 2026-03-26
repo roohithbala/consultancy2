@@ -1,0 +1,94 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import api from "../api";
+import { Link } from "react-router-dom";
+
+function AddProduction() {
+
+  const [formData, setFormData] = useState({
+    po_id: "",
+    fabric_id: "",
+    dyeing_id: "",
+    cutting_date: "",
+    dyeing_date: "",
+    combing_date: "",
+    inspection_date: "",
+    testing_date: "",
+    status: "",
+    remarks: ""
+  });
+
+  const [dyeingList, setDyeingList] = useState([]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // 🔥 fetch dyeing dropdown
+  useEffect(() => {
+    fetchDyeing();
+  }, []);
+
+  const fetchDyeing = async () => {
+    const res = await api.get("/dyeing/list");
+    setDyeingList(res.data);
+  };
+
+  const handleSave = async () => {
+
+    if (!formData.po_id || !formData.dyeing_id) {
+      alert("PO ID and Dyeing Unit required");
+      return;
+    }
+
+    try {
+      await api.post("/production", formData);
+      alert("Production added successfully");
+
+    } catch (err) {
+      console.error(err);
+      alert("Error adding production");
+    }
+  };
+
+  return (
+    <div className="container mt-4">
+
+      <h2>Add Production Process</h2>
+
+      <input className="form-control mb-2" name="po_id" placeholder="PO ID" onChange={handleChange} />
+      <input className="form-control mb-2" name="fabric_id" placeholder="Fabric ID" onChange={handleChange} />
+
+      {/* 🔥 DYEING DROPDOWN */}
+      <select className="form-control mb-2" name="dyeing_id" onChange={handleChange}>
+        <option value="">Select Dyeing Unit</option>
+        {dyeingList.map((d) => (
+          <option key={d.dyeing_id} value={d.dyeing_id}>
+            {d.dyeing_unit_name}
+          </option>
+        ))}
+      </select>
+
+      <input type="date" className="form-control mb-2" name="cutting_date" onChange={handleChange} />
+      <input type="date" className="form-control mb-2" name="dyeing_date" onChange={handleChange} />
+      <input type="date" className="form-control mb-2" name="combing_date" onChange={handleChange} />
+      <input type="date" className="form-control mb-2" name="inspection_date" onChange={handleChange} />
+      <input type="date" className="form-control mb-2" name="testing_date" onChange={handleChange} />
+
+      <select className="form-control mb-2" name="status" onChange={handleChange}>
+        <option value="">Select Status</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+
+      <input className="form-control mb-3" name="remarks" placeholder="Remarks" onChange={handleChange} />
+
+      <button className="btn btn-primary me-2" onClick={handleSave}>Save</button>
+      <Link to="/production-menu" className="btn btn-secondary">Back</Link>
+
+    </div>
+  );
+}
+
+export default AddProduction;
