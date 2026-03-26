@@ -38,6 +38,15 @@ app.get("/", (req, res) => {
   res.send("Textile Inventory System Backend Running");
 });
 
+app.get("/api-status", (req, res) => {
+  db.query("SELECT 1", (err, result) => {
+    if (err) {
+      return res.status(500).json({ status: "error", message: "Database connection failed", error: err });
+    }
+    res.json({ status: "ok", message: "Database connected successfully", data: result });
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
