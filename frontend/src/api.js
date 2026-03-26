@@ -1,4 +1,4 @@
-﻿import axios from "axios";
+import axios from "axios";
 
 // Centralized axios instance.
 // Set REACT_APP_API_URL in Vercel environment variables to point to your Render backend.
