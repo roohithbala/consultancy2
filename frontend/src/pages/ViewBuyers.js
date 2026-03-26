@@ -20,23 +20,23 @@ function ViewBuyers() {
   },[]);
 
   return (
-    <div className="container mt-4">
+    <div className="container mx-auto mt-12 px-4 animate-fade"><div className="rounded-3xl border border-white/40 bg-white/80 p-6 shadow-2xl backdrop-blur-xl">
 
-      <h2>Buyers List</h2>
+      <h2 className="text-3xl font-black tracking-tight text-slate-900 mb-8">Buyers List</h2>
 
-      <div className="table-responsive">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
 
-        <table className="table table-bordered table-striped">
+        <table className="w-full border-collapse text-left">
 
-          <thead className="table-dark">
+          <thead className="bg-slate-900 text-sm uppercase tracking-wider text-white">
             <tr>
-              <th>ID</th>
-              <th>Buyer Name</th>
-              <th>Company</th>
-              <th>Country</th>
-              <th>Contact Number</th>
-              <th>Email</th>
-              <th>Address</th>
+              <th className="px-6 py-4 font-bold">ID</th>
+              <th className="px-6 py-4 font-bold">Buyer Name</th>
+              <th className="px-6 py-4 font-bold">Company</th>
+              <th className="px-6 py-4 font-bold">Country</th>
+              <th className="px-6 py-4 font-bold">Contact Number</th>
+              <th className="px-6 py-4 font-bold">Email</th>
+              <th className="px-6 py-4 font-bold">Address</th>
             </tr>
           </thead>
 
@@ -44,13 +44,13 @@ function ViewBuyers() {
 
             {buyers.map((b)=>(
               <tr key={b.buyer_id}>
-                <td>{b.buyer_id}</td>
-                <td>{b.buyer_name}</td>
-                <td>{b.company_name}</td>
-                <td>{b.country}</td>
-                <td>{b.contact_number}</td>
-                <td>{b.email}</td>
-                <td>{b.address}</td>
+                <td className="border-t border-slate-100 px-6 py-4 text-slate-600">{b.buyer_id}</td>
+                <td className="border-t border-slate-100 px-6 py-4 text-slate-600">{b.buyer_name}</td>
+                <td className="border-t border-slate-100 px-6 py-4 text-slate-600">{b.company_name}</td>
+                <td className="border-t border-slate-100 px-6 py-4 text-slate-600">{b.country}</td>
+                <td className="border-t border-slate-100 px-6 py-4 text-slate-600">{b.contact_number}</td>
+                <td className="border-t border-slate-100 px-6 py-4 text-slate-600">{b.email}</td>
+                <td className="border-t border-slate-100 px-6 py-4 text-slate-600">{b.address}</td>
               </tr>
             ))}
 
@@ -60,11 +60,11 @@ function ViewBuyers() {
 
       </div>
 
-      <Link to="/buyers-menu" className="btn btn-secondary">
+      <Link to="/buyers-menu" className="rounded-2xl bg-gradient-to-br from-indigo-600 to-cyan-500 px-8 py-3 font-bold text-white shadow-lg transition-all hover:scale-[1.02] bg-slate-200 text-slate-700 hover:bg-slate-300 mt-3 text-decoration-none">
         Back
       </Link>
 
-    </div>
+    </div></div>
   );
 }
 

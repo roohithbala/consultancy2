@@ -76,45 +76,29 @@ function ProtectedRoute({ children }) {
 
 // ✅ DASHBOARD
 function Dashboard() {
-
   const modules = [
-    "Buyers",
-    "Purchase Orders",
-    "Yarn",
-    "Fabric",
-    "Dyeing",
-    "Suppliers",
-    "Accessories",
-    "Production Process",
-    "Employees",
-    "Packaging"
+    { name: "Buyers", route: "/buyers-menu", icon: "👥" },
+    { name: "Purchase Orders", route: "/purchase-orders-menu", icon: "📄" },
+    { name: "Yarn", route: "/yarn-menu", icon: "🧶" },
+    { name: "Fabric", route: "/fabric-menu", icon: "👕" },
+    { name: "Dyeing", route: "/dyeing-menu", icon: "🧪" },
+    { name: "Suppliers", route: "/suppliers-menu", icon: "🚚" },
+    { name: "Accessories", route: "/accessories-menu", icon: "🎀" },
+    { name: "Production Process", route: "/production-menu", icon: "⚙️" },
+    { name: "Employees", route: "/employees-menu", icon: "👷" },
+    { name: "Packaging", route: "/packaging-menu", icon: "📦" }
   ];
 
-  const routes = {
-    "Buyers": "/buyers-menu",
-    "Purchase Orders": "/purchase-orders-menu",
-    "Yarn": "/yarn-menu",
-    "Fabric": "/fabric-menu",
-    "Dyeing": "/dyeing-menu",
-    "Suppliers": "/suppliers-menu",
-    "Accessories": "/accessories-menu",
-    "Production Process": "/production-menu",
-    "Employees": "/employees-menu",
-    "Packaging": "/packaging-menu"
-  };
-
   return (
-    <div style={{ background:"#f4f6f9", minHeight:"100vh" }}>
-
-      {/* NAVBAR */}
-      <nav className="navbar navbar-dark bg-dark px-4 d-flex justify-content-between">
-
-        <span className="navbar-brand mb-0 h1">
-          Lara Knitwear System
+    <div className="min-h-screen bg-slate-50 pb-12 animate-fade">
+      {/* PREMIUM NAVBAR */}
+      <nav className="sticky top-4 z-50 mx-4 mt-4 flex items-center justify-between rounded-2xl border border-white/30 bg-white/70 p-4 shadow-xl backdrop-blur-xl">
+        <span className="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-2xl font-black tracking-tight text-transparent">
+          Lara Knitwear
         </span>
 
         <button
-          className="btn btn-danger btn-sm"
+          className="rounded-xl bg-gradient-to-br from-red-500 to-rose-600 px-6 py-2 text-sm font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-rose-200"
           onClick={() => {
             localStorage.removeItem("isLoggedIn");
             window.location.href = "/";
@@ -122,49 +106,37 @@ function Dashboard() {
         >
           Logout
         </button>
-
       </nav>
 
-      <div className="container mt-5">
+      <div className="container mx-auto mt-12 px-4">
+        <header className="mb-12 text-center">
+          <h1 className="mb-2 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+            Management Dashboard
+          </h1>
+          <p className="text-lg text-slate-500">
+            Welcome back. Select a module to manage your textile inventory.
+          </p>
+        </header>
 
-        <h2 className="text-center mb-5 fw-bold">
-          Management Dashboard
-        </h2>
-
-        <div className="row g-4">
-
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {modules.map((module, index) => (
-            <div className="col-md-4" key={index}>
-
-              <div
-                className="card text-white shadow"
-                style={{
-                  borderRadius:"15px",
-                  background:"linear-gradient(135deg,#3a7bd5,#00d2ff)"
-                }}
-              >
-
-                <div className="card-body text-center">
-
-                  <h5 className="card-title mb-4">
-                    {module}
-                  </h5>
-
-                  <Link to={routes[module]} className="btn btn-light">
-                    Open Module
-                  </Link>
-
+            <div key={index} className="group relative">
+              <div className="flex flex-col items-center justify-between rounded-3xl border border-white/40 bg-white/80 p-8 text-center shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                <div className="mb-4 text-5xl transition-transform duration-300 group-hover:scale-110">
+                  {module.icon}
                 </div>
-
+                <h5 className="mb-6 text-xl font-bold text-slate-800">{module.name}</h5>
+                <Link
+                  to={module.route}
+                  className="w-full rounded-2xl bg-gradient-to-br from-indigo-600 to-cyan-500 py-3 font-bold text-white shadow-lg transition-all hover:scale-[1.02] hover:shadow-indigo-200"
+                >
+                  Open Module
+                </Link>
               </div>
-
             </div>
           ))}
-
         </div>
-
       </div>
-
     </div>
   );
 }

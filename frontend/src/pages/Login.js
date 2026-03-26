@@ -31,70 +31,49 @@ function Login() {
   };
 
   return (
-    <div style={{
-      height: "100vh",
-      background: "#0f172a",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontFamily: "Segoe UI, sans-serif"
-    }}>
+    <div className="flex h-screen items-center justify-center bg-slate-900 font-sans antialiased animate-fade">
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-12 shadow-2xl backdrop-blur-2xl">
+        <header className="mb-10 text-center">
+          <h3 className="mb-2 text-3xl font-black tracking-tight text-white font-display">
+            Lara Knitwear
+          </h3>
+          <p className="text-slate-400 font-medium">
+            Inventory management system
+          </p>
+        </header>
 
-      <div style={{
-        background: "rgba(255, 255, 255, 0.08)",
-        backdropFilter: "blur(12px)",
-        padding: "40px",
-        borderRadius: "16px",
-        width: "350px",
-        boxShadow: "0 8px 30px rgba(0,0,0,0.4)",
-        border: "1px solid rgba(255,255,255,0.1)"
-      }}>
+        <div className="space-y-4">
+          <div>
+            <input
+              className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all placeholder:text-slate-500 focus:border-indigo-500 focus:bg-white/10 focus:outline-none focus:ring-4 focus:ring-indigo-500/20"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
 
-        <h3 style={{
-          textAlign: "center",
-          color: "white",
-          fontWeight: "600"
-        }}>
-          Lara Knitwear
-        </h3>
+          <div>
+            <input
+              type="password"
+              className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all placeholder:text-slate-500 focus:border-indigo-500 focus:bg-white/10 focus:outline-none focus:ring-4 focus:ring-indigo-500/20"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        <p style={{
-          textAlign: "center",
-          color: "#cbd5e1",
-          marginBottom: "25px"
-        }}>
-          Database Management System
-        </p>
+          <button
+            className="mt-6 w-full rounded-2xl bg-gradient-to-br from-indigo-600 to-cyan-500 py-4 text-lg font-bold text-white shadow-xl transition-all hover:scale-[1.02] hover:shadow-indigo-500/25 active:scale-95"
+            onClick={handleLogin}
+          >
+            Sign In
+          </button>
+        </div>
 
-        <input
-          className="form-control mb-3"
-          placeholder="Username"
-          value={username}
-          onChange={(e)=>setUsername(e.target.value)}
-        />
-
-        <input
-          type="password"
-          className="form-control mb-4"
-          placeholder="Password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-        />
-
-        <button
-          className="btn w-100"
-          style={{
-            background: "#2563eb",
-            color: "white",
-            fontWeight: "600"
-          }}
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-
+        <footer className="mt-8 text-center text-sm text-slate-500">
+          &copy; 2026 Lara Knitwear. All rights reserved.
+        </footer>
       </div>
-
     </div>
   );
 }
